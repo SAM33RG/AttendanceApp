@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button logout,addClass;
+    private Button logout,addClass,addStudents;
 
 
     @Override
@@ -19,8 +19,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         logout =  (Button) findViewById(R.id.main_logout);
         addClass =  (Button) findViewById(R.id.main_add_class);
+        addStudents = (Button) findViewById(R.id.main_add_student);
         logout.setOnClickListener(this);
         addClass.setOnClickListener(this);
+        addStudents.setOnClickListener(this);
 
     }
 
@@ -36,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             break;
             case R.id.main_add_class:{
                 startActivity(new Intent(this, AddClassActivity.class));
+            }
+            break;
+            case R.id.main_add_student:{
+                startActivity(new Intent(this, AddStudentsActivity.class));
+
             }
             break;
         }

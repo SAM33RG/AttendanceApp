@@ -26,8 +26,8 @@ public class AddClassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_class);
-         database = FirebaseDatabase.getInstance();
-         myRef = database.getReference("class");
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("class");
 
         name =  (EditText) findViewById(R.id.add_class_name);
         add =  (Button) findViewById(R.id.add_class_add);
@@ -42,10 +42,10 @@ public class AddClassActivity extends AppCompatActivity {
             }
         });
 
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Toast.makeText(getApplicationContext(),"value add sucess",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"value add success",Toast.LENGTH_LONG).show();
                 name.setText("");
             }
 
