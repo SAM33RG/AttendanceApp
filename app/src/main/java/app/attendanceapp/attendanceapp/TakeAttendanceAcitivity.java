@@ -16,19 +16,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class AddStudentsActivity extends AppCompatActivity {
-
+public class TakeAttendanceAcitivity extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference myRef;
-    ArrayList<String>nameList;
+    ArrayList<String> nameList;
     RecyclerView recyclerView;
     AllClassesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_students);
+        setContentView(R.layout.activity_take_attendance_acitivity);
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("class");
@@ -37,7 +36,7 @@ public class AddStudentsActivity extends AppCompatActivity {
         recyclerView =  (RecyclerView) findViewById(R.id.all_classes_recyler);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =  new AllClassesAdapter(this,nameList,"add student");
+        adapter =  new AllClassesAdapter(this,nameList,"take attendance");
         recyclerView.setAdapter(adapter);
 
         myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").addChildEventListener(new ChildEventListener() {
@@ -71,4 +70,5 @@ public class AddStudentsActivity extends AppCompatActivity {
             }
         });
     }
+
 }

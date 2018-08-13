@@ -19,7 +19,11 @@
         </activity>
         <activity android:name=".AddClassActivity" />
         <activity android:name=".AddStudentsActivity" />
-        <activity android:name=".AddStudentDataActivity"></activity>
+        <activity android:name=".AddStudentDataActivity" />
+        <activity android:name=".TakeAttendanceAcitivity" />
+        <activity android:name=".AddLecture" />
+        <activity android:name=".TakeStudentAttendanceActivity" />
+        <activity android:name=".ViewAttendanceShowClasses"></activity>
     </application>
 
 </manifest>

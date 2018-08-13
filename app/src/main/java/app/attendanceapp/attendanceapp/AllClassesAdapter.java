@@ -19,11 +19,13 @@ public class AllClassesAdapter extends RecyclerView.Adapter<AllClassesAdapter.Vi
 
     private Context context;
     private List<String> listItems;
+    private String activity;
 
 
-    public AllClassesAdapter(Context c, List list){
+    public AllClassesAdapter(Context c, List list,String activity){
         context = c;
         this.listItems = list;
+        this.activity = activity;
     }
 
     @Override
@@ -40,11 +42,14 @@ public class AllClassesAdapter extends RecyclerView.Adapter<AllClassesAdapter.Vi
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context,AddStudentDataActivity.class).putExtra("className",listItems.get(position)));
+                if (activity.compareToIgnoreCase("add student")==0) {
+                    context.startActivity(new Intent(context,AddStudentDataActivity.class).putExtra("className",listItems.get(position)));
+                }else  if (activity.compareToIgnoreCase("take attendance")==0) {
+                    context.startActivity(new Intent(context,TakeStudentAttendanceActivity.class).putExtra("className",listItems.get(position)));
+                }
 
             }
         });
-
     }
 
     @Override
