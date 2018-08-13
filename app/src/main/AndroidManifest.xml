@@ -23,7 +23,9 @@
         <activity android:name=".TakeAttendanceAcitivity" />
         <activity android:name=".AddLecture" />
         <activity android:name=".TakeStudentAttendanceActivity" />
-        <activity android:name=".ViewAttendanceShowClasses"></activity>
+        <activity android:name=".ViewAttendanceShowClasses" />
+        <activity android:name=".ViewAttendanceShowSubClasses" />
+        <activity android:name=".ViewClassAttendanceActivity"></activity>
     </application>
 
 </manifest>

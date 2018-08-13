@@ -16,34 +16,38 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class ViewAttendanceShowClasses extends AppCompatActivity {
+public class ViewAttendanceShowSubClasses extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference myRef;
-    ArrayList<String> nameList;
+    ArrayList<DateTitle> nameList;
     RecyclerView recyclerView;
-    AllClassesAdapter adapter;
+    SubClassesAdpater adapter;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_attendance_show_classes);
+        setContentView(R.layout.activity_view_attendance_show_sub_classes);
+
+        bundle = getIntent().getExtras();
+        final String name = bundle.getString("className");
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("class");
+        myRef = database.getReference("attendance").child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name);
         nameList = new ArrayList<>();
         //nameList.add("123");
         recyclerView =  (RecyclerView) findViewById(R.id.all_classes_recyler);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =  new AllClassesAdapter(this,nameList,"view attendance");
+        adapter =  new SubClassesAdpater(this,nameList);
         recyclerView.setAdapter(adapter);
 
-        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").addChildEventListener(new ChildEventListener() {
+        myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Map<String, String> map= (Map <String, String>) dataSnapshot.getValue();
-                nameList.add(map.get("name"));
+                nameList.add(new DateTitle(map.get("title"),map.get("date"),map.get("id")) );
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
                 Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
