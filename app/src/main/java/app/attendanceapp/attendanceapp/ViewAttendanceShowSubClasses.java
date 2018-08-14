@@ -40,7 +40,7 @@ public class ViewAttendanceShowSubClasses extends AppCompatActivity {
         recyclerView =  (RecyclerView) findViewById(R.id.all_classes_recyler);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =  new SubClassesAdpater(this,nameList);
+        adapter =  new SubClassesAdpater(this,nameList,name);
         recyclerView.setAdapter(adapter);
 
         myRef.addChildEventListener(new ChildEventListener() {

@@ -47,7 +47,7 @@ public class AddStudentsActivity extends AppCompatActivity {
                 nameList.add(map.get("name"));
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
-                Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
             }
 
             @Override
