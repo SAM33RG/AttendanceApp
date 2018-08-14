@@ -104,7 +104,7 @@ public class TakeStudentAttendanceActivity extends AppCompatActivity {
         });
 
 
-        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).addChildEventListener(new ChildEventListener() {
+        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("data").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Toast.makeText(getApplicationContext(),"value add success\nnew student can be added",Toast.LENGTH_LONG).show();

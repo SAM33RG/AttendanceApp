@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button logout,addClass,addStudents,takeAttendance, viewAttendance;
+    private Button logout,addClass,addStudents,takeAttendance, viewAttendance, deleteStudents;
 
 
     @Override
@@ -22,11 +22,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addStudents = (Button) findViewById(R.id.main_add_student);
         takeAttendance = (Button) findViewById(R.id.main_take_attandance);
         viewAttendance = (Button) findViewById(R.id.main_iew_attendance);
+        deleteStudents =  (Button) findViewById(R.id.main_delete_student) ;
         logout.setOnClickListener(this);
         addClass.setOnClickListener(this);
         addStudents.setOnClickListener(this);
         takeAttendance.setOnClickListener(this);
         viewAttendance.setOnClickListener(this);
+        deleteStudents.setOnClickListener(this);
 
     }
 
@@ -55,7 +57,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             break;
             case R.id.main_iew_attendance:{
-                startActivity(new Intent(this, ViewAttendanceShowClasses.class));
+                startActivity(new Intent(this, ViewAttendanceShowClasses    .class));
+
+            }
+            break;
+            case R.id.main_delete_student:{
+                startActivity(new Intent(this, DeleteStudentsShowClass    .class));
 
             }
             break;

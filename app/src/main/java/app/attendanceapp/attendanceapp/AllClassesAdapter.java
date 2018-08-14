@@ -49,6 +49,9 @@ public class AllClassesAdapter extends RecyclerView.Adapter<AllClassesAdapter.Vi
                 }else  if (activity.compareToIgnoreCase("view attendance")==0) {
                     context.startActivity(new Intent(context,ViewAttendanceShowSubClasses.class).putExtra("className",listItems.get(position)));
                 }
+                else  if (activity.compareToIgnoreCase("delete students")==0) {
+                    context.startActivity(new Intent(context,DeleteStudentForClass.class).putExtra("className",listItems.get(position)));
+                }
 
             }
         });

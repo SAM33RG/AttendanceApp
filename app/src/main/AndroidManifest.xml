@@ -26,7 +26,8 @@
         <activity android:name=".ViewAttendanceShowClasses" />
         <activity android:name=".ViewAttendanceShowSubClasses" />
         <activity android:name=".ViewClassAttendanceActivity" />
-        <activity android:name=".DeleteStudentsShowClass"></activity>
+        <activity android:name=".DeleteStudentsShowClass" />
+        <activity android:name=".DeleteStudentForClass"></activity>
     </application>
 
 </manifest>

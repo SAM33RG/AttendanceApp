@@ -45,8 +45,9 @@ public class AddStudentDataActivity extends AppCompatActivity {
         addToFirebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child(studentRollNO.getText().toString()).child("student name").setValue(studentName.getText().toString());
-                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child(studentRollNO.getText().toString()).child("student roll no").setValue(studentRollNO.getText().toString());
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("name").setValue(name);
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("data").child(studentRollNO.getText().toString()).child("student name").setValue(studentName.getText().toString());
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("data").child(studentRollNO.getText().toString()).child("student roll no").setValue(studentRollNO.getText().toString());
 
 
             }
