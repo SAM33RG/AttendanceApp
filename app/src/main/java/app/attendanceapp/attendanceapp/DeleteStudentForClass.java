@@ -37,6 +37,7 @@ public class DeleteStudentForClass extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         final String name = bundle.getString("className");
+        final String sem =  bundle.getString("sem");
         Toast.makeText(this, "name " +name,Toast.LENGTH_SHORT).show();
 
         database = FirebaseDatabase.getInstance();
@@ -56,7 +57,7 @@ public class DeleteStudentForClass extends AppCompatActivity {
                 nameList = adapter.getList();
                 for (int i=0; i<nameList.size();i++){
                     if (nameList.get(i).toBeDeleted){
-                        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("data").child(nameList.get(i).rollno).removeValue();
+                        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").child(nameList.get(i).rollno).removeValue();
                     }
                     if (i == nameList.size()-1){
                         finish();
@@ -65,7 +66,8 @@ public class DeleteStudentForClass extends AppCompatActivity {
             }
         });
 
-        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("data").addChildEventListener(new ChildEventListener() {
+
+        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Map<String, String> map= (Map <String, String>) dataSnapshot.getValue();
