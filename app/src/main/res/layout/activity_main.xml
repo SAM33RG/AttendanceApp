@@ -7,23 +7,13 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/main_admin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="Admin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/main_add_class"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:text="Add Class"
-        app:layout_constraintStart_toEndOf="@+id/main_admin"
+        app:layout_constraintStart_toEndOf="@+id/main_logout"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -31,10 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
         android:text="add Students"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_admin" />
+        tools:layout_editor_absoluteY="96dp" />
 
     <Button
         android:id="@+id/main_delete_student"
@@ -70,9 +59,9 @@
         android:id="@+id/main_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
