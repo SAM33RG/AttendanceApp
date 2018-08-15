@@ -27,7 +27,7 @@ public class TakeStudentAttendanceActivity extends AppCompatActivity {
 
     Bundle bundle;
     Button addToFirebase;
-    String name;
+    String name, sem;
     FirebaseDatabase database;
     DatabaseReference myRef;
     DatabaseReference attendanceRef;
@@ -51,7 +51,8 @@ public class TakeStudentAttendanceActivity extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         name = bundle.getString("className");
-        attendanceRef = database.getReference("attendance").child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name);
+        sem = bundle.getString("sem");
+        attendanceRef = database.getReference("attendance").child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem);
 
 
         sumbit =  (Button) findViewById(R.id.take_student_attendace_send_to_firebase);
@@ -104,7 +105,7 @@ public class TakeStudentAttendanceActivity extends AppCompatActivity {
         });
 
 
-        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("data").addChildEventListener(new ChildEventListener() {
+        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Toast.makeText(getApplicationContext(),"value add success\nnew student can be added",Toast.LENGTH_LONG).show();

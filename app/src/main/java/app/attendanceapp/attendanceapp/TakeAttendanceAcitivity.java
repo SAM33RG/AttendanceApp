@@ -1,9 +1,15 @@
 package app.attendanceapp.attendanceapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,34 +25,51 @@ import java.util.Map;
 public class TakeAttendanceAcitivity extends AppCompatActivity {
 
     FirebaseDatabase database;
-    DatabaseReference myRef;
-    ArrayList<String> nameList;
-    RecyclerView recyclerView;
-    AllClassesAdapter adapter;
+    DatabaseReference myRef, semRef;
+    ArrayList<String>nameList, semList;
+    /*RecyclerView recyclerView;
+    AllClassesAdapter adapter;*/
+    Spinner classSpinner, semSpinner;
+    ArrayAdapter<String> adapter, adapterForSem;
+    String className, semName;
+    Button addData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance_acitivity);
-
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("class");
-        nameList = new ArrayList<>();
-        //nameList.add("123");
-        recyclerView =  (RecyclerView) findViewById(R.id.all_classes_recyler);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =  new AllClassesAdapter(this,nameList,"take attendance");
-        recyclerView.setAdapter(adapter);
+        semRef = database.getReference("class");
 
-        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child("sem").addChildEventListener(new ChildEventListener() {
+        nameList = new ArrayList<>();
+        semList = new ArrayList<>();
+
+        classSpinner = (Spinner) findViewById(R.id.class_spinner);
+        semSpinner = (Spinner) findViewById(R.id.sem_spinner);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, nameList);
+        adapterForSem = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, semList);
+        semSpinner.setAdapter(adapterForSem);
+        addData = (Button) findViewById(R.id.add_data);
+        addData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getApplicationContext(),TakeStudentAttendanceActivity.class).putExtra("className",className).putExtra("sem",semName));
+            }
+        });
+
+
+
+        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Map<String, String> map= (Map <String, String>) dataSnapshot.getValue();
-                nameList.add(map.get("name"));
+                // Map<String, String> map= (Map <String, String>) dataSnapshot.getValue();
+                nameList.add(dataSnapshot.getKey());
+                className =  dataSnapshot.getKey();
                 adapter.notifyDataSetChanged();
-                recyclerView.setAdapter(adapter);
-               // Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
+                classSpinner.setAdapter(adapter);
+                // Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -66,6 +89,62 @@ public class TakeAttendanceAcitivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                semList.clear();
+                semRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(nameList.get(position)).child("sem").addChildEventListener(new ChildEventListener() {
+                    @Override
+                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                        Map<String, String> map= (Map <String, String>) dataSnapshot.getValue();
+                        semList.add(map.get("sem"));
+                        adapterForSem.notifyDataSetChanged();
+                        semSpinner.setAdapter(adapterForSem);
+                        // Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+
+
+        });
+
+        semSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                semName = semList.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });

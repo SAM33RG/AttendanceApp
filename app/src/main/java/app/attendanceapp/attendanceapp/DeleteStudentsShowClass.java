@@ -26,8 +26,6 @@ public class DeleteStudentsShowClass extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef, semRef;
     ArrayList<String>nameList, semList;
-    /*RecyclerView recyclerView;
-    AllClassesAdapter adapter;*/
     Spinner classSpinner, semSpinner;
     ArrayAdapter<String> adapter, adapterForSem;
     String className, semName;
@@ -46,12 +44,6 @@ public class DeleteStudentsShowClass extends AppCompatActivity {
 
         nameList = new ArrayList<>();
         semList = new ArrayList<>();
-        //nameList.add("123");
-        /*recyclerView =  (RecyclerView) findViewById(R.id.all_classes_recyler);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =  new AllClassesAdapter(this,nameList,"add student");
-        recyclerView.setAdapter(adapter);*/
 
         classSpinner = (Spinner) findViewById(R.id.class_spinner);
         semSpinner = (Spinner) findViewById(R.id.sem_spinner);
