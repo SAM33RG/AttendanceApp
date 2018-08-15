@@ -32,15 +32,16 @@ public class ViewAttendanceShowSubClasses extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         final String name = bundle.getString("className");
+        final String sem = bundle.getString("sem");
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("attendance").child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name);
+        myRef = database.getReference("attendance").child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem);
         nameList = new ArrayList<>();
         //nameList.add("123");
         recyclerView =  (RecyclerView) findViewById(R.id.all_classes_recyler);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =  new SubClassesAdpater(this,nameList,name);
+        adapter =  new SubClassesAdpater(this,nameList,name,sem);
         recyclerView.setAdapter(adapter);
 
         myRef.addChildEventListener(new ChildEventListener() {

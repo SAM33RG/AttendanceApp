@@ -27,8 +27,6 @@ public class TakeAttendanceAcitivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef, semRef;
     ArrayList<String>nameList, semList;
-    /*RecyclerView recyclerView;
-    AllClassesAdapter adapter;*/
     Spinner classSpinner, semSpinner;
     ArrayAdapter<String> adapter, adapterForSem;
     String className, semName;
@@ -38,6 +36,7 @@ public class TakeAttendanceAcitivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_attendance_acitivity);
+
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("class");
         semRef = database.getReference("class");

@@ -35,11 +35,13 @@ public class ViewClassAttendanceActivity extends AppCompatActivity {
 
         final String name = bundle.getString("className");
         final String id = bundle.getString("id");
-       // Toast.makeText(this,"class: "+ name+"\nid: "+id,Toast.LENGTH_SHORT).show();
+        final String sem = bundle.getString("sem");
+
+        // Toast.makeText(this,"class: "+ name+"\nid: "+id,Toast.LENGTH_SHORT).show();
 
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("attendance").child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child(id).child("attendance");
+        myRef = database.getReference("attendance").child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child(id).child("attendance");
         nameList = new ArrayList<>();
         //nameList.add("123");
         recyclerView =  (RecyclerView) findViewById(R.id.all_classes_recyler);

@@ -16,13 +16,14 @@ public class SubClassesAdpater extends RecyclerView.Adapter<SubClassesAdpater.Vi
     private Context context;
     private List<DateTitle> listItems;
     private String activity;
-    private String className;
+    private String className, sem;
 
 
-    public SubClassesAdpater(Context c, List list,String className){
+    public SubClassesAdpater(Context c, List list,String className, String sem){
         context = c;
         this.listItems = list;
         this.className =  className;
+        this.sem =  sem;
 
     }
 
@@ -41,7 +42,7 @@ public class SubClassesAdpater extends RecyclerView.Adapter<SubClassesAdpater.Vi
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context,ViewClassAttendanceActivity.class).putExtra("className",className).putExtra("id",listItems.get(position).id));
+                context.startActivity(new Intent(context,ViewClassAttendanceActivity.class).putExtra("className",className).putExtra("id",listItems.get(position).id).putExtra("sem",sem));
             }
         });
     }
