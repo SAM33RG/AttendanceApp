@@ -11,23 +11,25 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">
+
+        </activity>
+        <activity android:name=".AddClassActivity" />
+        <activity android:name=".AddStudentsActivity" />
+        <activity android:name=".AddStudentDataActivity" />
+        <activity android:name=".TakeAttendanceAcitivity" />
+        <activity android:name=".TakeStudentAttendanceActivity" />
+        <activity android:name=".ViewAttendanceShowClasses" />
+        <activity android:name=".ViewAttendanceShowSubClasses" />
+        <activity android:name=".ViewClassAttendanceActivity" />
+        <activity android:name=".DeleteStudentsShowClass" />
+        <activity android:name=".DeleteStudentForClass" />
+        <activity android:name=".Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddClassActivity" />
-        <activity android:name=".AddStudentsActivity" />
-        <activity android:name=".AddStudentDataActivity" />
-        <activity android:name=".TakeAttendanceAcitivity" />
-        <activity android:name=".AddLecture" />
-        <activity android:name=".TakeStudentAttendanceActivity" />
-        <activity android:name=".ViewAttendanceShowClasses" />
-        <activity android:name=".ViewAttendanceShowSubClasses" />
-        <activity android:name=".ViewClassAttendanceActivity" />
-        <activity android:name=".DeleteStudentsShowClass" />
-        <activity android:name=".DeleteStudentForClass"></activity>
     </application>
 
 </manifest>
