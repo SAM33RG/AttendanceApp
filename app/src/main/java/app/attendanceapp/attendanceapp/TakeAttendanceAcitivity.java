@@ -39,7 +39,7 @@ public class TakeAttendanceAcitivity extends AppCompatActivity {
         adapter =  new AllClassesAdapter(this,nameList,"take attendance");
         recyclerView.setAdapter(adapter);
 
-        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").addChildEventListener(new ChildEventListener() {
+        myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child("sem").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Map<String, String> map= (Map <String, String>) dataSnapshot.getValue();

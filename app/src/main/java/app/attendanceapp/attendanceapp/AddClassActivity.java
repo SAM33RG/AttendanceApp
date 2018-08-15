@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AddClassActivity extends AppCompatActivity {
 
-    EditText name;
+    EditText name, sem;
     Button add;
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -30,14 +30,18 @@ public class AddClassActivity extends AppCompatActivity {
         myRef = database.getReference("class");
 
         name =  (EditText) findViewById(R.id.add_class_name);
+        sem =  (EditText) findViewById(R.id.add_class_sem);
+
         add =  (Button) findViewById(R.id.add_class_add);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("name").setValue(name.getText().toString());
-                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("attendance").setValue("false");
+                myRef.push().child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).setValue(name.getText().toString());
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("name").setValue(name.getText().toString());
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("attendance").setValue("false");
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("sem").setValue(sem.getText().toString());
 
             }
         });
@@ -47,6 +51,7 @@ public class AddClassActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Toast.makeText(getApplicationContext(),"value add success",Toast.LENGTH_LONG).show();
                 name.setText("");
+                sem.setText("");
             }
 
             @Override

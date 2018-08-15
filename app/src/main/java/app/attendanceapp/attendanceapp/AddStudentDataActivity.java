@@ -17,7 +17,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class AddStudentDataActivity extends AppCompatActivity {
     Bundle bundle;
-    String name;
+    String name,sem;
     TextView nameTV;
     EditText studentName, studentRollNO;
     Button addToFirebase;
@@ -33,6 +33,7 @@ public class AddStudentDataActivity extends AppCompatActivity {
 
         bundle = getIntent().getExtras();
         name = bundle.getString("className");
+        sem =  bundle.getString("sem");
 
         nameTV = (TextView) findViewById(R.id.add_student_data_class_name);
         nameTV.setText(name);
@@ -45,9 +46,9 @@ public class AddStudentDataActivity extends AppCompatActivity {
         addToFirebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("name").setValue(name);
-                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("data").child(studentRollNO.getText().toString()).child("student name").setValue(studentName.getText().toString());
-                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("data").child(studentRollNO.getText().toString()).child("student roll no").setValue(studentRollNO.getText().toString());
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("name").setValue(name);
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").child(studentRollNO.getText().toString()).child("student name").setValue(studentName.getText().toString());
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").child(studentRollNO.getText().toString()).child("student roll no").setValue(studentRollNO.getText().toString());
 
 
             }
