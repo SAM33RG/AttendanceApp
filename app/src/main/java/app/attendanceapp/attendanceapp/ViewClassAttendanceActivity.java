@@ -1,5 +1,6 @@
 package app.attendanceapp.attendanceapp;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +24,8 @@ public class ViewClassAttendanceActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ShowAttendanceAdapter adapter;
     Bundle bundle;
+    ActionBar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,12 @@ public class ViewClassAttendanceActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("attendance").child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child(id).child("attendance");
         nameList = new ArrayList<>();
-        //nameList.add("123");
+
+        toolbar = getSupportActionBar();
+        toolbar.setTitle("View Attendance");
+        toolbar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setDisplayShowHomeEnabled(true);
+
         recyclerView =  (RecyclerView) findViewById(R.id.all_classes_recyler);
         recyclerView.setHasFixedSize(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -79,6 +87,12 @@ public class ViewClassAttendanceActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
 

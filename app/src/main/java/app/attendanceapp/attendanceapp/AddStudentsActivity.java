@@ -1,6 +1,7 @@
 package app.attendanceapp.attendanceapp;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,12 +29,12 @@ public class AddStudentsActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef, semRef;
     ArrayList<String>nameList, semList;
-    /*RecyclerView recyclerView;
-    AllClassesAdapter adapter;*/
     Spinner classSpinner, semSpinner;
     ArrayAdapter<String> adapter, adapterForSem;
     String className, semName;
     Button addData;
+    ActionBar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +47,12 @@ public class AddStudentsActivity extends AppCompatActivity {
 
         nameList = new ArrayList<>();
         semList = new ArrayList<>();
-        //nameList.add("123");
-        /*recyclerView =  (RecyclerView) findViewById(R.id.all_classes_recyler);
-        recyclerView.setHasFixedSize(false);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter =  new AllClassesAdapter(this,nameList,"add student");
-        recyclerView.setAdapter(adapter);*/
+
+        toolbar = getSupportActionBar();
+        toolbar.setTitle("Add Students");
+        toolbar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setDisplayShowHomeEnabled(true);
+
 
         classSpinner = (Spinner) findViewById(R.id.class_spinner);
         semSpinner = (Spinner) findViewById(R.id.sem_spinner);
@@ -157,5 +158,11 @@ public class AddStudentsActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
 
 }

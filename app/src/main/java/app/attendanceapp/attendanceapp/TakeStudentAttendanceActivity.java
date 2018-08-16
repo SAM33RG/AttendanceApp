@@ -1,5 +1,6 @@
 package app.attendanceapp.attendanceapp;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,6 +38,8 @@ public class TakeStudentAttendanceActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ArrayList<AttendanceData> list;
+    ActionBar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,11 @@ public class TakeStudentAttendanceActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("students");
         list = new ArrayList<>();
+
+        toolbar = getSupportActionBar();
+        toolbar.setTitle("Take Attendance");
+        toolbar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setDisplayShowHomeEnabled(true);
 
 
 
@@ -139,5 +147,11 @@ public class TakeStudentAttendanceActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }

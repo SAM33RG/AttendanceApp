@@ -1,6 +1,7 @@
 package app.attendanceapp.attendanceapp;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,12 +23,19 @@ public class AddClassActivity extends AppCompatActivity {
     Button add;
     FirebaseDatabase database;
     DatabaseReference myRef;
+    ActionBar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_class);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("class");
+
+        toolbar = getSupportActionBar();
+        toolbar.setTitle("Add Class");
+        toolbar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setDisplayShowHomeEnabled(true);
 
         name =  (EditText) findViewById(R.id.add_class_name);
         sem =  (EditText) findViewById(R.id.add_class_sem);
@@ -61,5 +69,10 @@ public class AddClassActivity extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }

@@ -1,6 +1,7 @@
 package app.attendanceapp.attendanceapp;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +32,8 @@ public class TakeAttendanceAcitivity extends AppCompatActivity {
     ArrayAdapter<String> adapter, adapterForSem;
     String className, semName;
     Button addData;
+    ActionBar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,11 @@ public class TakeAttendanceAcitivity extends AppCompatActivity {
 
         nameList = new ArrayList<>();
         semList = new ArrayList<>();
+
+        toolbar = getSupportActionBar();
+        toolbar.setTitle("Take Attendance");
+        toolbar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setDisplayShowHomeEnabled(true);
 
         classSpinner = (Spinner) findViewById(R.id.class_spinner);
         semSpinner = (Spinner) findViewById(R.id.sem_spinner);
@@ -147,6 +155,11 @@ public class TakeAttendanceAcitivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
 }

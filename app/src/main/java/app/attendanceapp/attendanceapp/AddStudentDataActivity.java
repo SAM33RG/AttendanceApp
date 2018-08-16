@@ -1,5 +1,6 @@
 package app.attendanceapp.attendanceapp;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,12 +25,20 @@ public class AddStudentDataActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef;
 
+    ActionBar toolbar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student_data);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("students");
+
+        toolbar = getSupportActionBar();
+        toolbar.setTitle("Add Students");
+        toolbar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setDisplayShowHomeEnabled(true);
 
         bundle = getIntent().getExtras();
         name = bundle.getString("className");
@@ -73,5 +82,10 @@ public class AddStudentDataActivity extends AppCompatActivity {
 
 
 
+    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }
