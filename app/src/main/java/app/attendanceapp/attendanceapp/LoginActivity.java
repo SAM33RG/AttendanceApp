@@ -51,15 +51,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //updateUI(currentUser);
 
     }
-
-
     @Override
     public void onClick(View view) {
         int id  = view.getId();
         switch (id){
             case R.id.login_sign_in:{
-                String emailString = email.getText().toString();
-                String passwordString =  password.getText().toString();
+                if (email.getText().toString().compareTo("")==0||password.getText().toString().compareTo("")==0){
+                    Toast.makeText(getApplicationContext(),"please fill ALL FIELDS to continue",Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                String emailString = email.getText().toString().trim();
+                String passwordString =  password.getText().toString().trim();
                 mAuth.signInWithEmailAndPassword(emailString, passwordString)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -88,6 +90,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             break;
 
             case R.id.login_sign_up:{
+                if (email.getText().toString().compareTo("")==0||password.getText().toString().compareTo("")==0){
+                    Toast.makeText(getApplicationContext(),"please fill ALL FIELDS to continue",Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 String emailString = email.getText().toString().trim();
                 String passwordString =  password.getText().toString().trim();
                 mAuth.createUserWithEmailAndPassword(emailString, passwordString)
