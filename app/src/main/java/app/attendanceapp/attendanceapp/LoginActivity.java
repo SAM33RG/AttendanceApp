@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     startMianActivity();
 
                                 } else {
-                                    Toast.makeText(getApplicationContext(), task.getException().toString(),
+                                    Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage().toString(),
                                             Toast.LENGTH_SHORT).show();
                                 }
 
