@@ -3,13 +3,14 @@ package app.attendanceapp.attendanceapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button logout,addClass,addStudents,takeAttendance, viewAttendance, deleteStudents;
+    private CardView logout,addClass,addStudents,takeAttendance, viewAttendance, deleteStudents;
 
 
     @Override
@@ -17,12 +18,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        logout =  (Button) findViewById(R.id.main_logout);
-        addClass =  (Button) findViewById(R.id.main_add_class);
-        addStudents = (Button) findViewById(R.id.main_add_student);
-        takeAttendance = (Button) findViewById(R.id.main_take_attandance);
-        viewAttendance = (Button) findViewById(R.id.main_iew_attendance);
-        deleteStudents =  (Button) findViewById(R.id.main_delete_student) ;
+        logout =  (CardView) findViewById(R.id.main_logout);
+        addClass =  (CardView) findViewById(R.id.main_add_class);
+        addStudents = (CardView) findViewById(R.id.main_add_student);
+        takeAttendance = (CardView) findViewById(R.id.main_take_attendance);
+        viewAttendance = (CardView) findViewById(R.id.main_iew_attendance);
+        deleteStudents =  (CardView) findViewById(R.id.main_delete_student) ;
         logout.setOnClickListener(this);
         addClass.setOnClickListener(this);
         addStudents.setOnClickListener(this);
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
             break;
-            case R.id.main_take_attandance:{
+            case R.id.main_take_attendance:{
                 startActivity(new Intent(this, TakeAttendanceAcitivity.class));
 
             }

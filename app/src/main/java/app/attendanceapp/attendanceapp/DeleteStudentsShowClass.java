@@ -1,6 +1,7 @@
 package app.attendanceapp.attendanceapp;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -21,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class DeleteStudentsShowClass extends AppCompatActivity {
+public class DeleteStudentsShowClass extends AppCompatActivity  {
 
     FirebaseDatabase database;
     DatabaseReference myRef, semRef;
@@ -30,6 +32,8 @@ public class DeleteStudentsShowClass extends AppCompatActivity {
     ArrayAdapter<String> adapter, adapterForSem;
     String className, semName;
     Button addData;
+    ActionBar toolbar;
+    View backButton;
 
 
     @Override
@@ -41,6 +45,12 @@ public class DeleteStudentsShowClass extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("class");
         semRef = database.getReference("class");
+
+        toolbar = getSupportActionBar();
+        toolbar.setTitle("Delete Students");
+        toolbar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setDisplayShowHomeEnabled(true);
+
 
         nameList = new ArrayList<>();
         semList = new ArrayList<>();
@@ -149,6 +159,11 @@ public class DeleteStudentsShowClass extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 
 

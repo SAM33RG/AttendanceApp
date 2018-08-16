@@ -88,8 +88,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             break;
 
             case R.id.login_sign_up:{
-                String emailString = email.getText().toString();
-                String passwordString =  password.getText().toString();
+                String emailString = email.getText().toString().trim();
+                String passwordString =  password.getText().toString().trim();
                 mAuth.createUserWithEmailAndPassword(emailString, passwordString)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override

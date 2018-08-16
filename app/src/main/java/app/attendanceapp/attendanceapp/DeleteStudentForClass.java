@@ -1,6 +1,7 @@
 package app.attendanceapp.attendanceapp;
 
 import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +29,8 @@ public class DeleteStudentForClass extends AppCompatActivity {
     DeleteStudentAdapter adapter;
     Bundle bundle;
     Button deleteSelected;
+    ActionBar toolbar;
+
 
 
     @Override
@@ -48,6 +51,11 @@ public class DeleteStudentForClass extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter =  new DeleteStudentAdapter(this,nameList,name);
         recyclerView.setAdapter(adapter);
+
+        toolbar = getSupportActionBar();
+        toolbar.setTitle("Delete Students");
+        toolbar.setDisplayHomeAsUpEnabled(true);
+        toolbar.setDisplayShowHomeEnabled(true);
 
         deleteSelected = (Button) findViewById(R.id.delete_selected);
 
@@ -104,5 +112,11 @@ public class DeleteStudentForClass extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }
