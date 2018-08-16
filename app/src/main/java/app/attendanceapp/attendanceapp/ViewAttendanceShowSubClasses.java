@@ -58,7 +58,6 @@ public class ViewAttendanceShowSubClasses extends AppCompatActivity {
                 nameList.add(new DateTitle(map.get("title"),map.get("date"),map.get("id")) );
                 adapter.notifyDataSetChanged();
                 recyclerView.setAdapter(adapter);
-                Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -24,6 +24,7 @@ public class AddClassActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference myRef;
     ActionBar toolbar;
+    Boolean firstDataChange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class AddClassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_class);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("class");
+
+        firstDataChange = true;
 
         toolbar = getSupportActionBar();
         toolbar.setTitle("Add Class");
@@ -49,7 +52,13 @@ public class AddClassActivity extends AppCompatActivity {
                 myRef.push().child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).setValue(name.getText().toString());
                 myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("name").setValue(name.getText().toString());
                 myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("attendance").setValue("false");
-                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("sem").setValue(sem.getText().toString());
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("sem").setValue(sem.getText().toString(),new DatabaseReference.CompletionListener() {
+                    public void onComplete(DatabaseError error, DatabaseReference ref) {
+                        Toast.makeText(getApplicationContext(),"Class Added",Toast.LENGTH_LONG).show();
+                        name.setText("");
+                        sem.setText("");
+                    }
+                });
 
             }
         });
@@ -57,9 +66,12 @@ public class AddClassActivity extends AppCompatActivity {
         myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Toast.makeText(getApplicationContext(),"value add success",Toast.LENGTH_LONG).show();
-                name.setText("");
-                sem.setText("");
+              /*  if (firstDataChange){
+                    firstDataChange = false;
+                    return;
+                }
+                Toast.makeText(getApplicationContext(),"Class Added",Toast.LENGTH_LONG).show();*/
+
             }
 
             @Override

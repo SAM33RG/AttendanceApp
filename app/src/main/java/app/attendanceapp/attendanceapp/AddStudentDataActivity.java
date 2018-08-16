@@ -26,14 +26,18 @@ public class AddStudentDataActivity extends AppCompatActivity {
     DatabaseReference myRef;
 
     ActionBar toolbar;
+    Boolean firstDataChange;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_student_data);
+
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("students");
+
+        firstDataChange =true;
 
         toolbar = getSupportActionBar();
         toolbar.setTitle("Add Students");
@@ -57,7 +61,13 @@ public class AddStudentDataActivity extends AppCompatActivity {
             public void onClick(View view) {
                 myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("name").setValue(name);
                 myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").child(studentRollNO.getText().toString()).child("student name").setValue(studentName.getText().toString());
-                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").child(studentRollNO.getText().toString()).child("student roll no").setValue(studentRollNO.getText().toString());
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").child(studentRollNO.getText().toString()).child("student roll no").setValue(studentRollNO.getText().toString(),new DatabaseReference.CompletionListener() {
+                    public void onComplete(DatabaseError error, DatabaseReference ref) {
+                        Toast.makeText(getApplicationContext(),"Student Added.\nTo delete student go to delete Student.",Toast.LENGTH_SHORT).show();
+                        studentName.setText("");
+                        studentRollNO.setText("");
+                    }
+                });
 
 
             }
@@ -66,9 +76,13 @@ public class AddStudentDataActivity extends AppCompatActivity {
         myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Toast.makeText(getApplicationContext(),"value add success\nnew student can be added",Toast.LENGTH_LONG).show();
+                /*if (firstDataChange){
+                    firstDataChange =false;
+                    return;
+                }
+                Toast.makeText(getApplicationContext(),"Student Added.\nTo delete student go to delete Student.",Toast.LENGTH_SHORT).show();
                 studentName.setText("");
-                studentRollNO.setText("");
+                studentRollNO.setText("");*/
 
             }
 

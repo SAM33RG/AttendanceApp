@@ -43,12 +43,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null){
             startMianActivity();
         }
-        //updateUI(currentUser);
 
     }
     @Override
@@ -67,23 +65,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                   // Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Toast.makeText(getApplicationContext(), "User Logged in.",
                                             Toast.LENGTH_SHORT).show();
                                     startMianActivity();
 
-                                    // updateUI(user);
                                 } else {
-                                    // If sign in fails, display a message to the user.
-                                   // Log.w(TAG, "signInWithEmail:failure", task.getException());
                                     Toast.makeText(getApplicationContext(), task.getException().toString(),
                                             Toast.LENGTH_SHORT).show();
-                                   // updateUI(null);
                                 }
 
-                                // ...
                             }
                         });
             }
@@ -101,22 +92,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    //Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Toast.makeText(getApplicationContext(), "User Created and Logged in.",
                                             Toast.LENGTH_SHORT).show();
                                     startMianActivity();
-                                    //updateUI(user);
                                 } else {
-                                    // If sign in fails, display a message to the user.
-                                   // Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                     Toast.makeText(getApplicationContext(), task.getException().getLocalizedMessage().toString(),
                                             Toast.LENGTH_SHORT).show();
-                                    //updateUI(null);
                                 }
 
-                                // ...
                             }
                         });
             }
@@ -127,5 +111,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
     private void startMianActivity(){
         startActivity(new Intent(this,MainActivity.class));
+        finish();
     }
 }

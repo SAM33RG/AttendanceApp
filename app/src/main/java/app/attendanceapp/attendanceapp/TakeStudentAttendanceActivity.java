@@ -116,7 +116,6 @@ public class TakeStudentAttendanceActivity extends AppCompatActivity {
         myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Toast.makeText(getApplicationContext(),"value add success\nnew student can be added",Toast.LENGTH_LONG).show();
                 Map<String, String> map= (Map <String, String>) dataSnapshot.getValue();
                 list.add(new AttendanceData(map.get("student roll no"),map.get("student name")));
                 adapter.notifyDataSetChanged();

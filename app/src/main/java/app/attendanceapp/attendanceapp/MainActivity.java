@@ -12,6 +12,11 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private CardView logout,addClass,addStudents,takeAttendance, viewAttendance, deleteStudents;
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (id){
             case R.id.main_logout:{
                 FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(this, LoginActivity.class));
+
                 finish();
 
             }

@@ -41,7 +41,7 @@ public class DeleteStudentForClass extends AppCompatActivity {
         bundle = getIntent().getExtras();
         final String name = bundle.getString("className");
         final String sem =  bundle.getString("sem");
-        Toast.makeText(this, "name " +name,Toast.LENGTH_SHORT).show();
+       // Toast.makeText(this, "name " +name,Toast.LENGTH_SHORT).show();
 
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference("students");
