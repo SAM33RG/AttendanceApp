@@ -68,6 +68,7 @@ public class DeleteStudentForClass extends AppCompatActivity {
                         myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").child(nameList.get(i).rollno).removeValue();
                     }
                     if (i == nameList.size()-1){
+                        Toast.makeText(getApplicationContext(),"Students Deleted",Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }

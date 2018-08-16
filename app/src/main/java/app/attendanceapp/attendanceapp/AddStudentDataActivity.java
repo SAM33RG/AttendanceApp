@@ -63,7 +63,7 @@ public class AddStudentDataActivity extends AppCompatActivity {
                 myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").child(studentRollNO.getText().toString()).child("student name").setValue(studentName.getText().toString());
                 myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name).child("sem").child(sem).child("data").child(studentRollNO.getText().toString()).child("student roll no").setValue(studentRollNO.getText().toString(),new DatabaseReference.CompletionListener() {
                     public void onComplete(DatabaseError error, DatabaseReference ref) {
-                        Toast.makeText(getApplicationContext(),"Student Added.\nTo delete student go to delete Student.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Student Added.",Toast.LENGTH_SHORT).show();
                         studentName.setText("");
                         studentRollNO.setText("");
                     }
