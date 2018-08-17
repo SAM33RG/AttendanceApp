@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
-    private Button signIn, signUp;
+    private Button signIn, signUp,fogot;
     EditText email, password;
 
     @Override
@@ -29,8 +29,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         signIn = (Button) findViewById(R.id.login_sign_in);
         signUp = (Button) findViewById(R.id.login_sign_up);
+        fogot = (Button) findViewById(R.id.login_forgot);
         signIn.setOnClickListener(this);
         signUp.setOnClickListener(this);
+        fogot.setOnClickListener(this);
 
         email =  (EditText)findViewById(R.id.login_email);
         password = (EditText)findViewById(R.id.login_password);
@@ -101,6 +103,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             Toast.LENGTH_SHORT).show();
                                 }
 
+                            }
+                        });
+            }
+            break;
+            case R.id.login_forgot:{
+                if (email.getText().toString().compareTo("")==0){
+                    Toast.makeText(getApplicationContext(),"please fill EMAIL to continue",Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                mAuth.sendPasswordResetEmail(email.getText().toString().trim())
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(),"email sent to your id\n",Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(getApplicationContext(),"failed to send email",Toast.LENGTH_SHORT).show();
+
+                                }
                             }
                         });
             }

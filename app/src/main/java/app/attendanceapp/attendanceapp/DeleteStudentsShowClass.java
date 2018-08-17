@@ -43,8 +43,11 @@ public class DeleteStudentsShowClass extends AppCompatActivity  {
 
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("class");
-        semRef = database.getReference("class");
+        myRef = database.getReference("students");
+        semRef = database.getReference("students");
+
+        className="";
+        semName="";
 
         toolbar = getSupportActionBar();
         toolbar.setTitle("Delete Students");
@@ -64,8 +67,13 @@ public class DeleteStudentsShowClass extends AppCompatActivity  {
         addData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (className.compareTo("")==00||semName.compareTo("")==0){
 
-                startActivity(new Intent(getApplicationContext(),DeleteStudentForClass.class).putExtra("className",className).putExtra("sem",semName));
+                }else {
+                    startActivity(new Intent(getApplicationContext(),DeleteStudentForClass.class).putExtra("className",className).putExtra("sem",semName));
+
+                }
+
             }
         });
 
@@ -111,7 +119,7 @@ public class DeleteStudentsShowClass extends AppCompatActivity  {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         Map<String, String> map= (Map <String, String>) dataSnapshot.getValue();
-                        semList.add(map.get("sem"));
+                        semList.add(dataSnapshot.getKey());
                         adapterForSem.notifyDataSetChanged();
                         semSpinner.setAdapter(adapterForSem);
                         // Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
