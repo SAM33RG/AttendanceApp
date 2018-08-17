@@ -49,7 +49,7 @@ public class AddClassActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                myRef.push().child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).setValue(name.getText().toString());
+                myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).setValue(name.getText().toString());
                 myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("name").setValue(name.getText().toString());
                 myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("attendance").setValue("false");
                 myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(name.getText().toString()).child("sem").child(sem.getText().toString()).child("sem").setValue(sem.getText().toString(),new DatabaseReference.CompletionListener() {
@@ -66,11 +66,6 @@ public class AddClassActivity extends AppCompatActivity {
         myRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-              /*  if (firstDataChange){
-                    firstDataChange = false;
-                    return;
-                }
-                Toast.makeText(getApplicationContext(),"Class Added",Toast.LENGTH_LONG).show();*/
 
             }
 

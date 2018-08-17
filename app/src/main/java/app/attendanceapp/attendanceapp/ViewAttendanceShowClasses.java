@@ -72,7 +72,6 @@ public class ViewAttendanceShowClasses extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 // Map<String, String> map= (Map <String, String>) dataSnapshot.getValue();
                 nameList.add(dataSnapshot.getKey());
-                className =  dataSnapshot.getKey();
                 adapter.notifyDataSetChanged();
                 classSpinner.setAdapter(adapter);
                 // Toast.makeText(getApplicationContext(),"found",Toast.LENGTH_SHORT).show();
@@ -103,6 +102,7 @@ public class ViewAttendanceShowClasses extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 semList.clear();
+                className=nameList.get(position);
                 semRef.child("users").child(FirebaseAuth.getInstance().getUid()).child("class").child(nameList.get(position)).child("sem").addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
